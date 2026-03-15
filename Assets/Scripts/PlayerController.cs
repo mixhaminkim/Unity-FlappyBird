@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("TODO: 점수 증가");
         _gameManager.AddScore();
     }
 }

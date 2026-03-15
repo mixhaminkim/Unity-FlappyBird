@@ -247,7 +247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &143143267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143143266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3253ba6e45a191a45a4667ce6f41da73, type: 3}
   m_Name: 
@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &325266959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -514,8 +514,8 @@ GameObject:
   - component: {fileID: 577312550}
   - component: {fileID: 577312549}
   - component: {fileID: 577312553}
-  - component: {fileID: 577312554}
   - component: {fileID: 577312555}
+  - component: {fileID: 577312556}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -641,21 +641,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &577312554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 577312548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03ab87c1b8de589448c734cc759ad965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  jumpForce: 5
 --- !u!114 &577312555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +673,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &577312556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577312548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c56a517ce338bf478d22c22e53b903a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAgent
+  jumpForce: 5
+  decisionInterval: 0.5
+  learningRate: 0.3
+  discountFactor: 0.5
+  initialEpsilon: 0.1
+  surviveReward: 0.05
+  pipePassReward: 100
+  collisionPenalty: -1000
+  gapNearThreshold: 0.8
+  gapNearReward: 0.5
+  gapMidThreshold: 2
+  gapMidReward: 0.5
+  gapFarPenalty: -0.1
+  maxYPosition: 4.5
+  minYPosition: 2
+  maxUpVelocity: 1
 --- !u!1 &1065574785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1077,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583374011}
   m_CullTransparentMesh: 1
+--- !u!1 &1888010391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888010393}
+  - component: {fileID: 1888010392}
+  m_Layer: 0
+  m_Name: AgentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1888010392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888010391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81486396554af0645ba374af4a5587a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentManager
+  agent: {fileID: 577312556}
+  infoText: {fileID: 1583374013}
+  timeScale: 50
+  minEpsilon: 0.05
+  decayRate: 0.999
+--- !u!4 &1888010393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888010391}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1974100944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,3 +1540,4 @@ SceneRoots:
   - {fileID: 143143268}
   - {fileID: 1427223226}
   - {fileID: 166474786}
+  - {fileID: 1888010393}

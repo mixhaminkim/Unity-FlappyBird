@@ -6,21 +6,23 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI playInfoText;
-    public Button RestartButton;
+    public Button restartButton;
+    
     private int score = 0;
     private static int bestScore = 0;
 
     void Start()
     {
-        RestartButton.onClick.AddListener(Restart);
-        RestartButton.gameObject.SetActive(false);
+        restartButton.onClick.AddListener(Restart);
+        restartButton.gameObject.SetActive(false);
     }
+    
     void Update()
     {
         playInfoText.text = $"Score: {score}\n"+
                             $"Best: {bestScore}";
     }
-
+    
     public void AddScore(int value = 1)
     {
         score += value;
@@ -32,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        RestartButton.gameObject.SetActive(true);
-        Time.timeScale = 0f;
+        restartButton.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void Restart()
